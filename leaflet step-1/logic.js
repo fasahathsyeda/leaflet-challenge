@@ -10,17 +10,14 @@ d3.json(queryUrl, function(data) {
 });
 
 function createFeatures(earthquakeData) {
-  console.log(earthquakeData);
 
 
   // Give each feature a popup describing the place and time of the earthquake
   function onEachFeature(feature, layer) {
-  
     layer.bindPopup("<h3>" + feature.properties.place +
       "</h3><hr><p>" + new Date(feature.properties.time) + "</p>" +
       "</h3><hr><p>Magnitude: " + feature.properties.mag + "</p>");
   }
-  //console.log(layer);
 
   
 
@@ -43,7 +40,6 @@ function createFeatures(earthquakeData) {
         opacity: 1,
         fillOpacity: 0.8
       };
-    
       return L.circleMarker(latlng, geojsonMarkerOptions);
     }
   });
@@ -57,13 +53,9 @@ function createFeatures(earthquakeData) {
 function createMap(earthquakes) {
 
   // Define streetmap and darkmap layers
-  var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 16,
-    id: "light-v10",
-    accessToken: API_KEY
-  });
-  
+  var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?" +
+    "access_token=pk.eyJ1Ijoic3llZGFmYXNhaGF0aCIsImEiOiJja2k2bXhhYnIwMnRvMnhueGR6M3FreTVwIn0.xPHkk5mRCZ1Z2gLjsrF-BQ"
+    );
 
   // Define a baseMaps object to hold our base layers
   var baseMaps = {
@@ -75,21 +67,14 @@ function createMap(earthquakes) {
     Earthquakes: earthquakes
   };
 
-
-
-
   // Create our map, giving it the streetmap and earthquakes layers to display on load
-  const myMap = L.map("mapid", {
+  var myMap = L.map("map", {
     center: [
       37.09, -95.71
     ],
     zoom: 5,
     layers: [streetmap, earthquakes]
   });
-  console.log(myMap);
-
-L.control.layers(baseMaps, overlayMaps).addTo(myMap);
-
 
 
   function getColor(d) {
