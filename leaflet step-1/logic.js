@@ -10,7 +10,7 @@ d3.json(queryUrl, function(data) {
 });
 
 function createFeatures(earthquakeData) {
-
+  console.log(earthquakeData);
 
   // Give each feature a popup describing the place and time of the earthquake
   function onEachFeature(feature, layer) {
@@ -53,9 +53,23 @@ function createFeatures(earthquakeData) {
 function createMap(earthquakes) {
 
   // Define streetmap and darkmap layers
-  var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?" +
-    "access_token=pk.eyJ1Ijoic3llZGFmYXNhaGF0aCIsImEiOiJja2k2bXhhYnIwMnRvMnhueGR6M3FreTVwIn0.xPHkk5mRCZ1Z2gLjsrF-BQ"
-    );
+  // var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}?" +
+  //   "access_token=pk.eyJ1Ijoic3llZGFmYXNhaGF0aCIsImEiOiJja2k2bXhhYnIwMnRvMnhueGR6M3FreTVwIn0.xPHkk5mRCZ1Z2gLjsrF-BQ",
+
+  
+  // var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  //   attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  //   tileSize: 512,
+  //   maxZoom: 18,
+  //   zoomOffset: -1,
+  //   id: "mapbox/streets-v11",
+  //   accessToken: "pk.eyJ1Ijoic3llZGFmYXNhaGF0aCIsImEiOiJja2k2bXhhYnIwMnRvMnhueGR6M3FreTVwIn0.xPHkk5mRCZ1Z2gLjsrF-BQ"
+  // });
+  var streetmap=L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  maxZoom: 16,
+  id: "light-v10",
+  accessToken: API_KEY});
 
   // Define a baseMaps object to hold our base layers
   var baseMaps = {
